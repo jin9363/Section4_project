@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>감감 음소식</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    
+        h1, h2, iframe {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    
+        iframe {
+            max-width: 800px;
+            max-height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>감감 음소식</h1>
+
+    <form action="/predict" method="POST">
+        <input type="text" name="sentence" placeholder="30자 이내로 아무말이나 해보세요." style="width: 300px; height: 50px; font-size: 16px;">
+        <button type="submit">분석하기</button>
+    </form>
+    {% if not result %}
+    <iframe
+    src="http://127.0.0.1:3000/public/dashboard/d14a00bb-e3a0-41d4-9ef5-95ef4247f61d"
+    frameborder="0"
+    width="800"
+    height="600"
+    allowtransparency
+    ></iframe>
+    {% endif %}
+
+    {% if result %}
+    <h1>감정 분석 결과: {{ result }}</h1>
+    <h2>{{ result }}감정일 때 듣기 좋은 노래</h2>
+        <iframe width="560" height="315" src="{{ song_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <h2>감정 분류 결과</h2>
+    <iframe
+    src="http://127.0.0.1:3000/public/dashboard/906c81bb-caae-4064-8e9e-5ffffca37eb9"
+    frameborder="0"
+    width="800"
+    height="600"
+    allowtransparency
+    ></iframe>
+    {% endif %}
+</body>
+</html>
